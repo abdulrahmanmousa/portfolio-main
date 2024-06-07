@@ -14,7 +14,7 @@ export default function Home() {
       <div className="mt-8 text-base sm:text-lg">
         <p className="text-xl">
           {' '}
-          Hi, I'm Abdulrahman, a software engineer from Egypt.
+          Hi, I&apos;m Abdulrahman, a software engineer from Egypt.
         </p>
 
         <br />

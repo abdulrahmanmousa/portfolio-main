@@ -14,7 +14,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const [scrollProgress, setScrollProgress] = useState(0)
   const routes = ['/experience', '/work', '/about']
@@ -22,7 +22,7 @@ export default function RootLayout({
   console.log(currentRoute)
 
   useEffect(() => {
-    function handleScroll(event) {
+    function handleScroll(event: any) {
       const delta = event.deltaY || event.detail || event.wheelDelta
       console.log(event.wheelDelta, event.deltaY, event.offsetY)
 
@@ -51,7 +51,7 @@ export default function RootLayout({
   useEffect(() => {
     const nextRoute = routes[routes.indexOf(currentRoute) + 1]
     if (
-      scrollProgress > 100 &&
+      scrollProgress * 2 > 100 &&
       routes.indexOf(currentRoute) < 2 &&
       nextRoute !== currentRoute
     ) {
@@ -61,7 +61,6 @@ export default function RootLayout({
       }, 500)
     }
   }, [scrollProgress])
-  console.log(scrollProgress)
 
   return (
     <ViewTransitions>
@@ -76,8 +75,8 @@ export default function RootLayout({
           <div className="fixed left-0 top-0 h-2 w-full ">
             <div
               ref={ref}
-              className={`h-full ${scrollProgress > ref.current?.style.width ? 'transition-all delay-0 duration-500 ease-out' : 'transition-all delay-0 duration-500 '}  rounded-r-full bg-main `}
-              style={{ width: `${scrollProgress}%` }}
+              className={`h-full ${scrollProgress > Number(ref.current?.style.width) ? 'transition-all delay-0 duration-500 ease-out' : 'transition-all delay-0 duration-500 '}  rounded-r-full bg-main `}
+              style={{ width: `${scrollProgress * 2}%` }}
             ></div>
           </div>
           <div
